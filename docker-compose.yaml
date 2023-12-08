@@ -33,5 +33,16 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB= postgres
-    service_1:
+  service_1:
+      container_name: service_1
+      build: ./service_1
+      image: wurstmeister/service_1
+      ports:
+        - 8080:8080
+      volumes:
+        - ./service_1/service
+      environment:
+        - PORT= 8080
+        
+        # - APP1_KAFKA_BOOTSTRAP_SERVERS= kafka:9092
     
