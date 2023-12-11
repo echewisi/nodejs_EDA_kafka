@@ -43,6 +43,30 @@ services:
         - ./service_1/service
       environment:
         - PORT= 8080
-        
+        - POSTGRES_URL= postgres://postgres:postgres@postgres:5432/postgres
+        - KAFKA_BOOTSTRAP_SERVERS= 9092
+        - KAFKA_TOPIC= topic1
+      depends_on:
+        - postgres
+        - kafka
+        - mongo
+  service_2:
+      container_name: service_2
+      build: ./service_2
+      image: wurstmeister/service_1
+      ports:
+        - 8080:8080
+      volumes:
+        - ./service_2/service
+      environment:
+        - PORT= 8080
+        - POSTGRES_URL= postgres://postgres:postgres@postgres:5432/postgres
+        - KAFKA_BOOTSTRAP_SERVERS= 9092
+        - KAFKA_TOPIC= topic2
+      depends_on:
+        - postgres
+        - kafka
+        - mongo
+
         # - APP1_KAFKA_BOOTSTRAP_SERVERS= kafka:9092
     
